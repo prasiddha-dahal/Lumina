@@ -27,7 +27,9 @@ class HomeView extends StatelessWidget {
                     final product =
                         productController.products.value.data[index];
                     return ListTile(
-                      onTap: (){
+                      onTap: ()async{
+                        await productController.fetchProductDetail(product.id);
+                        
                         Get.to(() => ProductView());
                       },
                       leading: CircleAvatar(

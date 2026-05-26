@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:flutterecommerce/utils/apiUtil.dart';
 
 class ProductService {
   static Future getProducts() async {
-    Dio dio = Dio(
-      BaseOptions(baseUrl: "https://ecommerce.codeitappsware.com/api"),
-    );
+    final dio = Apiutil.dio;
+    
     try {
       final response = await dio.get("/products");
       if (response != null) {
@@ -14,4 +14,19 @@ class ProductService {
       print(e.toString());
     }
   }
+
+  static Future getProductDetail(int id) async {
+    final dio = Apiutil.dio;
+    try {
+      final response = await dio.get("/product/$id");
+      if (response != null) {
+        return response;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+
+
 }
