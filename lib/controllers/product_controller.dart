@@ -1,3 +1,4 @@
+import 'package:flutterecommerce/models/featured_product_model.dart';
 import 'package:flutterecommerce/models/product_detail_model.dart';
 import 'package:flutterecommerce/models/product_model.dart';
 import 'package:flutterecommerce/services/product_service.dart';
@@ -7,6 +8,7 @@ class ProductController extends GetxController {
   var isLoading = false.obs;
   var products = ProductModel(success: false, data: []).obs;
   var product = ProductDetailModel(product: null).obs;
+  var featuredProducts = FeaturedProductModel(success: false, data: []).obs;
 
 
   Future fetchProducts() async {
@@ -33,11 +35,25 @@ class ProductController extends GetxController {
     }
   }
 
+  Future fetchFeaturedProducts() async {
+    try {
+      isLoading.value = true;
+      final response = await ProductService.getFeaturedProducts();
+      featuredProducts.value = FeaturedProductModel.fromJson(response.data);
+    } catch (e) {
+      print(e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
     fetchProducts();
+    fetchFeaturedProducts();
   }
 }

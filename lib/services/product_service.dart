@@ -25,4 +25,16 @@ class ProductService {
     }
   }
 
+  static Future getFeaturedProducts() async {
+    final dio = Apiutil.dio;
+    try {
+      final response = await dio.get("/featured-products");
+      if (response != null) {
+        return response;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
 }
