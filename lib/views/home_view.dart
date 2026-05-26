@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutterecommerce/controllers/category_controller.dart';
 import 'package:flutterecommerce/controllers/product_controller.dart';
+import 'package:flutterecommerce/views/category_product_view.dart';
 import 'package:flutterecommerce/views/product_view.dart';
 import 'package:get/get.dart';
 
@@ -41,7 +42,15 @@ class HomeView extends StatelessWidget {
 
                           return Padding(
                             padding: const EdgeInsets.only(left: 10),
-                            child: Chip(label: Text("${category!.title}")),
+                            child: GestureDetector(
+                              onTap: () async {
+                                await categoryController.fetchCategoryProduct(
+                                  category.id,
+                                );
+                                Get.to(() => CategoryProductView());
+                              },
+                              child: Chip(label: Text("${category!.title}")),
+                            ),
                           );
                         },
                       ),
@@ -68,17 +77,6 @@ class HomeView extends StatelessWidget {
                         child: Image.network("${product.image}"),
                       ),
                       title: Text("${product.title}"),
-                      subtitle: Html(
-                        data: "${product.description}",
-                        style: {
-                          "body": Style(
-                            maxLines: 2,
-                            textOverflow: TextOverflow.ellipsis,
-                            margin: Margins.zero,
-                            padding: HtmlPaddings.zero,
-                          ),
-                        },
-                      ),
                     );
                   },
                 ),
