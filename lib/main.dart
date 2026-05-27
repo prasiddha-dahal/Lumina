@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutterecommerce/bindings/controllers_binding.dart';
 import 'package:flutterecommerce/views/home_view.dart';
+import 'package:flutterecommerce/views/login_view.dart';
 import 'package:flutterecommerce/views/register_view.dart';
+import 'package:flutterecommerce/views/splash_view.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.orange)),
-      home: RegisterView(),
+      home: SplashView(),
       initialBinding: ControllersBinding(),
     );
   }

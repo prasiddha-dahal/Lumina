@@ -8,7 +8,15 @@ class AuthService {
       "/register",
       data: {"name": name, "email": email, "password": password},
     );
-
     return response;
   }
+
+  static Future login(String email, String password) async {
+    final response = await Apiutil.dio.post(
+      "/login",
+      data: {"email": email, "password": password},
+    );
+    return response;
+  }
+
 }

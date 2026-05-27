@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:flutterecommerce/controllers/auth_controller.dart';
 import 'package:flutterecommerce/utils/screen_size.dart';
-import 'package:flutterecommerce/views/login_view.dart';
+import 'package:flutterecommerce/views/register_view.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class RegisterView extends GetView<AuthController> {
-  const RegisterView({super.key});
+class LoginView extends GetView<AuthController> {
+  const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +26,8 @@ class RegisterView extends GetView<AuthController> {
                   child: Form(
                     child: Column(
                       children: [
-                        Text("Register"),
+                        Text("Login"),
                         Gap(ScreenSize.vGap),
-                        //username
-                        TextFormField(
-                          controller: controller.name,
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.person),
-                            hint: Text("Enter your Full Name"),
-                            label: Text("Username"),
-                          ),
-                        ),
-
-                        Gap(ScreenSize.vGap),
-
                         //email
                         TextFormField(
                           controller: controller.email,
@@ -52,11 +40,12 @@ class RegisterView extends GetView<AuthController> {
                         ),
 
                         Gap(ScreenSize.vGap),
-                        // password
+
+                        //password
                         Obx(() {
                           return TextFormField(
                             controller: controller.password,
-                            obscureText: controller.isVisible.value,
+                            obscureText: !controller.isVisible.value,
                             decoration: InputDecoration(
                               prefixIcon: Icon(Icons.lock),
                               suffixIcon: IconButton(
@@ -76,17 +65,17 @@ class RegisterView extends GetView<AuthController> {
                         Gap(ScreenSize.vGap),
                         Gap(ScreenSize.vGap),
 
-                        // register button
+                        //login button
                         Row(
                           children: [
                             Expanded(
                               child: FilledButton(
                                 onPressed: () async {
                                   Loader.show(context);
-                                  await controller.register();
-                                  Loader.hide();
+                                    await controller.login();
+                                    Loader.hide();
                                 },
-                                child: Text("Register"),
+                                child: Text("Login"),
                               ),
                             ),
                           ],
@@ -94,17 +83,17 @@ class RegisterView extends GetView<AuthController> {
 
                         Gap(ScreenSize.vGap),
 
-                        //Already have an account
+                        //new user?
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Already hava an account? "),
+                            Text("New User? "),
                             GestureDetector(
                               onTap: () {
-                                Get.off(() => LoginView());
+                                Get.off(() => RegisterView());
                               },
                               child: Text(
-                                "Login",
+                                "Register",
                                 style: TextStyle(color: Colors.deepOrange),
                               ),
                             ),
