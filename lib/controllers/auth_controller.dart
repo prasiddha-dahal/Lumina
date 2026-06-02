@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutterecommerce/controllers/storage_controller.dart';
 import 'package:flutterecommerce/models/login_model.dart';
 import 'package:flutterecommerce/models/register_model.dart';
 import 'package:flutterecommerce/services/auth_service.dart';
 import 'package:flutterecommerce/views/home_view.dart';
+import 'package:flutterecommerce/views/login_view.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
@@ -18,6 +20,20 @@ class AuthController extends GetxController {
   var password = TextEditingController();
 
   var isVisible = false.obs;
+
+Future<void> authCheck() async {
+  var storageController = Get.find<StorageController>();
+
+  final token = await storageController.getToken();
+
+  await Future.delayed(const Duration(seconds: 3));
+
+  if (token == null) {
+    Get.off(() => const LoginView());
+  } else {
+    Get.off(() => const HomeView());
+  }
+} 
 
   Future register() async {
     try {
@@ -54,13 +70,14 @@ class AuthController extends GetxController {
   Future login() async {
     try {
       isLoading(true);
-      var response = await AuthService.login(
-        email.text,
-        password.text,
-      );
+      var response = await AuthService.login(email.text, password.text);
       if (response != null) {
         loginUser.value = LoginModel.fromJson(response.data);
         if (loginUser.value.success == true) {
+          var storageController = Get.find<StorageController>();
+          String? token = loginUser.value.token;
+          storageController.saveToken(token!);
+
           email.clear();
           password.clear();
           Get.snackbar(
@@ -86,4 +103,9 @@ class AuthController extends GetxController {
     isVisible.value = !isVisible.value;
   }
 
+  @override
+  void onInit() {
+    super.onInit();
+    authCheck();
+  }
 }

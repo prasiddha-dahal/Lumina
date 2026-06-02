@@ -2,7 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterecommerce/controllers/category_controller.dart';
 import 'package:flutterecommerce/controllers/product_controller.dart';
+import 'package:flutterecommerce/controllers/storage_controller.dart';
 import 'package:flutterecommerce/views/category_product_view.dart';
+import 'package:flutterecommerce/views/login_view.dart';
 import 'package:flutterecommerce/views/product_view.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -14,6 +16,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final productController = Get.find<ProductController>();
     final categoryController = Get.find<CategoryController>();
+    final storageController = Get.find<StorageController>();
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
@@ -37,6 +40,13 @@ class HomeView extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.shopping_bag_outlined, color: Colors.black87),
             onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.logout_outlined, color: Colors.black87),
+            onPressed: () {
+                storageController.removeToken();
+                Get.offAll(() => LoginView());
+            },
           ),
         ],
       ),
