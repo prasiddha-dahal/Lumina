@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterecommerce/controllers/category_controller.dart';
 import 'package:flutterecommerce/controllers/product_controller.dart';
 import 'package:flutterecommerce/controllers/storage_controller.dart';
+import 'package:flutterecommerce/views/cart_view.dart';
 import 'package:flutterecommerce/views/category_product_view.dart';
 import 'package:flutterecommerce/views/login_view.dart';
 import 'package:flutterecommerce/views/product_view.dart';
@@ -34,13 +35,12 @@ class HomeView extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search_rounded, color: Colors.black87),
-            onPressed: () {},
+            icon: const Icon(Icons.shopping_cart_checkout_outlined, color: Colors.black87),
+            onPressed: () {
+              Get.to(() => CartView());
+            },
           ),
-          IconButton(
-            icon: const Icon(Icons.shopping_bag_outlined, color: Colors.black87),
-            onPressed: () {},
-          ),
+          Text("1"),
           IconButton(
             icon: const Icon(Icons.logout_outlined, color: Colors.black87),
             onPressed: () {

@@ -132,7 +132,7 @@ class ProductView extends GetView<ProductController> {
                             color: Colors.black87,
                           ),
                           "p": Style(
-                            margin: Margins(bottom: Margin(12)), // ✅ Fixed here
+                            margin: Margins(bottom: Margin(12)), 
                           ),
                         },
                       ),

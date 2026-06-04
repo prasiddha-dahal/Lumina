@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterecommerce/bindings/controllers_binding.dart';
+import 'package:flutterecommerce/routes/app_pages.dart';
+import 'package:flutterecommerce/routes/app_routes.dart';
 import 'package:flutterecommerce/views/splash_view.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -20,6 +22,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.orange)),
       home: SplashView(),
       initialBinding: ControllersBinding(),
+      initialRoute: AppRoutes.splash,
+      getPages: AppPages.routes,
     );
   }
 }

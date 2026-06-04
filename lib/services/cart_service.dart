@@ -19,4 +19,21 @@ class CartService {
     );
     return response;
   }
+
+  static Future fetchCartItems() async{
+
+     // get token first
+    var controller = Get.find<StorageController>();
+    final token = controller.getToken();
+
+    // add token to the dio header
+    Apiutil.dio.options.headers["Authorization"] = "Bearer $token";
+
+    var response = await Apiutil.dio.get(
+      "/carts",
+    );
+
+    return response; 
+  }
+
 }
