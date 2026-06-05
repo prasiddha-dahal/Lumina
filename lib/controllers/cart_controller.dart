@@ -32,7 +32,10 @@ class CartController extends GetxController {
       if (response != null) {
         cartItems.value = CartModel.fromJson(response.data);
       }
-    } finally {
+    }catch(e){
+        print(e.toString());
+
+    }finally {
       isLoading.value = false;
     }
   }
@@ -42,5 +45,4 @@ class CartController extends GetxController {
     super.onInit();
     fetchCartItems();
   }
-
 }
