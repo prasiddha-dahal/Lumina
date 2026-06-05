@@ -1,3 +1,4 @@
+import 'package:flutterecommerce/bindings/cart_controller_binding.dart';
 import 'package:flutterecommerce/routes/app_routes.dart';
 import 'package:flutterecommerce/views/cart_view.dart';
 import 'package:flutterecommerce/views/category_product_view.dart';
@@ -13,7 +14,7 @@ class AppPages {
     GetPage(name: AppRoutes.splash, page: () => SplashView()),
     GetPage(name: AppRoutes.login, page: () => LoginView()),
     GetPage(name: AppRoutes.register, page: () => RegisterView()),
-    GetPage(name: AppRoutes.home, page: () => HomeView()),
+    GetPage(name: AppRoutes.home, page: () => HomeView(), binding: CartControllerBinding()),
     GetPage(name: AppRoutes.productDetail, page: () => ProductView()),
     GetPage(name: AppRoutes.productByCategries, page: () => CategoryProductView()),
     GetPage(name: AppRoutes.carts, page: () => CartView()),
