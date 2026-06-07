@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 
 class CartView extends GetView<CartController> {
   const CartView({super.key});
-
   @override
+
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
