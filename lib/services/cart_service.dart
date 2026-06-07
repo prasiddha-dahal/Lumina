@@ -35,6 +35,4 @@ class CartService {
 
     return response; 
   }
-
-
 }
