@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutterecommerce/controllers/storage_controller.dart';
 import 'package:flutterecommerce/models/login_model.dart';
 import 'package:flutterecommerce/models/register_model.dart';
-import 'package:flutterecommerce/routes/app_pages.dart';
 import 'package:flutterecommerce/routes/app_routes.dart';
 import 'package:flutterecommerce/services/auth_service.dart';
-import 'package:flutterecommerce/views/home_view.dart';
-import 'package:flutterecommerce/views/login_view.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
@@ -31,7 +28,7 @@ Future<void> authCheck() async {
   await Future.delayed(const Duration(seconds: 3));
 
   if (token == null) {
-    Get.offNamed(AppRoutes.splash);
+    Get.offNamed(AppRoutes.login);
   } else {
     Get.offNamed(AppRoutes.home);
   }

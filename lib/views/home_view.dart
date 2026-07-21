@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterecommerce/controllers/cart_controller.dart';
 import 'package:flutterecommerce/controllers/category_controller.dart';
 import 'package:flutterecommerce/controllers/product_controller.dart';
 import 'package:flutterecommerce/controllers/storage_controller.dart';
@@ -18,6 +19,7 @@ class HomeView extends StatelessWidget {
     final productController = Get.find<ProductController>();
     final categoryController = Get.find<CategoryController>();
     final storageController = Get.find<StorageController>();
+    final cartController = Get.find<CartController>();
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
@@ -40,7 +42,9 @@ class HomeView extends StatelessWidget {
               Get.to(() => CartView());
             },
           ),
-          Text("1"),
+          Obx((){
+            return Text("${cartController.cartItems.value.data.length}");
+          }),
           IconButton(
             icon: const Icon(Icons.logout_outlined, color: Colors.black87),
             onPressed: () {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterecommerce/bindings/controllers_binding.dart';
 import 'package:flutterecommerce/routes/app_pages.dart';
 import 'package:flutterecommerce/routes/app_routes.dart';
+import 'package:flutterecommerce/views/home_view.dart';
 import 'package:flutterecommerce/views/splash_view.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';

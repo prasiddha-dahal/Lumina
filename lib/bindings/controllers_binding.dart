@@ -1,5 +1,4 @@
 import 'package:flutterecommerce/controllers/auth_controller.dart';
-import 'package:flutterecommerce/controllers/cart_controller.dart';
 import 'package:flutterecommerce/controllers/category_controller.dart';
 import 'package:flutterecommerce/controllers/product_controller.dart';
 import 'package:flutterecommerce/controllers/storage_controller.dart';
@@ -12,6 +11,5 @@ class ControllersBinding extends Bindings {
     Get.put<ProductController>(ProductController(),permanent: true);
     Get.put<CategoryController>(CategoryController(),permanent: true);
     Get.put<AuthController>(AuthController(),permanent: true);
-    Get.put<CartController>(CartController(),permanent: true);
   }
 }

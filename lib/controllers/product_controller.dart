@@ -3,13 +3,14 @@ import 'package:flutterecommerce/models/product_detail_model.dart';
 import 'package:flutterecommerce/models/product_model.dart';
 import 'package:flutterecommerce/services/product_service.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ProductController extends GetxController {
   var isLoading = false.obs;
   var products = ProductModel(success: false, data: []).obs;
   var product = ProductDetailModel(product: null).obs;
   var featuredProducts = FeaturedProductModel(success: false, data: []).obs;
-
+  var quantityCount = 1.obs;
 
   Future fetchProducts() async {
     try {
@@ -26,6 +27,7 @@ class ProductController extends GetxController {
   Future fetchProductDetail(int id) async {
     try {
       isLoading.value = true;
+      quantityCount.value = 1;
       final response = await ProductService.getProductDetail(id);
       product.value = ProductDetailModel.fromJson(response.data);
     } catch (e) {
@@ -47,7 +49,15 @@ class ProductController extends GetxController {
     }
   }
 
+  void increment() {
+    quantityCount.value = quantityCount.value + 1;
+  }
 
+  void decrement() {
+    if (quantityCount.value > 1) {
+      quantityCount.value = quantityCount.value - 1;
+    }
+  }
 
   @override
   void onInit() {

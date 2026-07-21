@@ -12,6 +12,7 @@ class ProductView extends GetView<ProductController> {
   @override
   Widget build(BuildContext context) {
     var cartController = Get.find<CartController>();
+
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
@@ -63,7 +64,8 @@ class ProductView extends GetView<ProductController> {
                     child: Image.network(
                       product.image ?? '',
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => const Icon(Icons.error, size: 60),
+                      errorBuilder: (_, __, ___) =>
+                          const Icon(Icons.error, size: 60),
                     ),
                   ),
                 ),
@@ -131,12 +133,41 @@ class ProductView extends GetView<ProductController> {
                             lineHeight: const LineHeight(1.6),
                             color: Colors.black87,
                           ),
-                          "p": Style(
-                            margin: Margins(bottom: Margin(12)), 
-                          ),
+                          "p": Style(margin: Margins(bottom: Margin(12))),
                         },
                       ),
                     ),
+
+                    const Gap(20),
+
+                    // item increment and decrement button
+                    Obx(() {
+                      return Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              controller.increment();
+                            },
+                            icon: Icon(Icons.add),
+                          ),
+                          Gap(10),
+                          Text(
+                            "${controller.quantityCount.value}",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Gap(10),
+                          IconButton(
+                            onPressed: () {
+                              controller.decrement();
+                            },
+                            icon: Icon(Icons.remove),
+                          ),
+                        ],
+                      );
+                    }),
 
                     const Gap(32),
 
@@ -145,9 +176,13 @@ class ProductView extends GetView<ProductController> {
                       width: double.infinity,
                       height: 58,
                       child: ElevatedButton(
-                        onPressed: () async{
+                        onPressed: () async {
                           Loader.show(context);
-                          await cartController.addToCart(product.id!, 1);
+                          await cartController.addToCart(
+                            product.id!,
+                            controller.quantityCount.value,
+                          );
+                          await cartController.fetchCartItems();
                           Loader.hide();
                         },
                         style: ElevatedButton.styleFrom(
