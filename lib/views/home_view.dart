@@ -37,19 +37,39 @@ class HomeView extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.shopping_cart_checkout_outlined, color: Colors.black87),
+            icon: const Icon(
+              Icons.shopping_cart_checkout_outlined,
+              color: Colors.black87,
+            ),
             onPressed: () {
               Get.to(() => CartView());
             },
           ),
-          Obx((){
+          Obx(() {
             return Text("${cartController.cartItems.value.data.length}");
           }),
           IconButton(
             icon: const Icon(Icons.logout_outlined, color: Colors.black87),
             onPressed: () {
-                storageController.removeToken();
-                Get.offAll(() => LoginView());
+              Get.defaultDialog(
+                title: "Logout",
+                content: Text("Are you sure?"),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    child: Text("Cancel"),
+                  ),
+                  FilledButton(
+                    onPressed: () {
+                      storageController.removeToken();
+                      Get.offAll(() => LoginView());
+                    },
+                    child: Text("Yes"),
+                  ),
+                ],
+              );
             },
           ),
         ],
@@ -126,7 +146,8 @@ class HomeView extends StatelessWidget {
                               Image.network(
                                 i.image ?? '',
                                 fit: BoxFit.cover,
-                                errorBuilder: (_, __, ___) => const Icon(Icons.error),
+                                errorBuilder: (_, __, ___) =>
+                                    const Icon(Icons.error),
                               ),
                               // Gradient Overlay
                               Positioned(
@@ -176,12 +197,12 @@ class HomeView extends StatelessWidget {
                   children: [
                     const Text(
                       "Categories",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text("See all"),
-                    ),
+                    TextButton(onPressed: () {}, child: const Text("See all")),
                   ],
                 ),
               ),
@@ -199,11 +220,14 @@ class HomeView extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     itemCount: categoryController.categories.value.data.length,
                     itemBuilder: (context, index) {
-                      final category = categoryController.categories.value.data[index];
+                      final category =
+                          categoryController.categories.value.data[index];
 
                       return GestureDetector(
                         onTap: () async {
-                          await categoryController.fetchCategoryProduct(category.id);
+                          await categoryController.fetchCategoryProduct(
+                            category.id,
+                          );
                           Get.to(() => const CategoryProductView());
                         },
                         child: Container(
@@ -224,7 +248,11 @@ class HomeView extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                child: const Icon(Icons.category_rounded, size: 32, color: Colors.deepPurple),
+                                child: const Icon(
+                                  Icons.category_rounded,
+                                  size: 32,
+                                  color: Colors.deepPurple,
+                                ),
                               ),
                               const Gap(8),
                               Text(
@@ -271,7 +299,8 @@ class HomeView extends StatelessWidget {
                   ),
                   itemCount: productController.products.value.data.length,
                   itemBuilder: (context, index) {
-                    final product = productController.products.value.data[index];
+                    final product =
+                        productController.products.value.data[index];
 
                     return GestureDetector(
                       onTap: () async {
@@ -294,7 +323,9 @@ class HomeView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ClipRRect(
-                              borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+                              borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(20),
+                              ),
                               child: Image.network(
                                 product.image ?? '',
                                 height: 160,

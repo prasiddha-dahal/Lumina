@@ -50,6 +50,7 @@ class CartView extends GetView<CartController> {
                                   Get.back();
                                 }, child: Text("Cancel")),
                                 FilledButton(onPressed: () async{
+                                  Get.back();
                                   Loader.show(context);
                                   await controller.deleteCartItem(product.cartId!);
                                   await controller.fetchCartItems();

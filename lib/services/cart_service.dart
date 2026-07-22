@@ -47,4 +47,16 @@ class CartService {
    var response = await Apiutil.dio.delete('/cart/$cartId');
     return response;
   }
+
+  static Future updateCart(int cartId, int productId, int quantity) async{
+
+    var controller = Get.find<StorageController>();
+    final token = controller.getToken();
+
+    // add token to the dio header
+    Apiutil.dio.options.headers["Authorization"] = "Bearer $token";
+
+    var response = await Apiutil.dio.patch('/cart/$cartId',data: {"product_id": productId, "qty": quantity}, );
+    return response;
+  }
 }
