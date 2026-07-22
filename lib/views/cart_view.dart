@@ -78,7 +78,7 @@ class CartView extends GetView<CartController> {
                                   textConfirm: "Update",
                                   onConfirm: () async{
                                     final quantity =  int.tryParse(quantityController.text) ;
-                                    if(quantity == null || quantity < 0){
+                                    if(quantity == null || quantity <= 0){
                                       Get.snackbar("Error", "Please enter valid quantity");
                                       return;
                                     }
