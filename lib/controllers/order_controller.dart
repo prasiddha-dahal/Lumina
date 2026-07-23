@@ -1,11 +1,13 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
+import 'package:flutterecommerce/controllers/cart_controller.dart';
+import 'package:flutterecommerce/routes/app_routes.dart';
 import 'package:flutterecommerce/services/order_service.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class OrderController extends GetxController {
+  var cartController = Get.find<CartController>();
   final isLoading = false.obs;
 
   final imagePicker = ImagePicker();
@@ -27,16 +29,11 @@ class OrderController extends GetxController {
       isLoading.value = true;
 
       final response = await OrderService.placeOrder(file);
-
-      Get.snackbar(
-        "Success",
-        response.data["message"] ?? "Order placed successfully",
-      );
-      Get.snackbar(
-        "Error",
-        "something went wrong"
-      );
-    } catch (e) {
+      if(response != null){
+        await cartController.fetchCartItems();
+        Get.offNamed(AppRoutes.orderComplete);
+      }
+   } catch (e) {
 
       Get.snackbar(
         "Error",

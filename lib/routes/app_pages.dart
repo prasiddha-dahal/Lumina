@@ -4,6 +4,7 @@ import 'package:flutterecommerce/views/cart_view.dart';
 import 'package:flutterecommerce/views/category_product_view.dart';
 import 'package:flutterecommerce/views/home_view.dart';
 import 'package:flutterecommerce/views/login_view.dart';
+import 'package:flutterecommerce/views/order_complete.dart';
 import 'package:flutterecommerce/views/order_view.dart';
 import 'package:flutterecommerce/views/product_view.dart';
 import 'package:flutterecommerce/views/register_view.dart';
@@ -20,5 +21,6 @@ class AppPages {
     GetPage(name: AppRoutes.productByCategries, page: () => CategoryProductView()),
     GetPage(name: AppRoutes.carts, page: () => CartView()),
     GetPage(name: AppRoutes.order, page: () => OrderView()),
+    GetPage(name: AppRoutes.orderComplete, page: () => OrderComplete()),
   ];
 }
