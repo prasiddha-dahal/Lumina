@@ -84,7 +84,7 @@ Future<void> authCheck() async {
             "Login successfully",
             backgroundColor: Colors.greenAccent,
           );
-          Get.off(AppRoutes.home);
+          Get.offNamed(AppRoutes.home);
         } else {
           Get.snackbar(
             "Error",

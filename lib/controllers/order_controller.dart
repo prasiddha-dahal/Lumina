@@ -1,25 +1,49 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
+import 'package:flutterecommerce/services/order_service.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-class OrderController extends GetxController{
-  Rx<bool> isLoading = false.obs;
-  ImagePicker imagePicker = ImagePicker();
+class OrderController extends GetxController {
+  final isLoading = false.obs;
 
-  Rx<File?> image = null.obs;
+  final imagePicker = ImagePicker();
 
+  final image = Rxn<File>();
 
-  //Image Picker
-  Future pickImage() async{
-    XFile? pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);
+  Future<void> pickImage() async {
+    final XFile? pickedFile = await imagePicker.pickImage(
+      source: ImageSource.gallery,
+    );
 
-    if(pickedFile != null){
-      image.value = File(pickedFile.path);    //type casting from XFile to File
+    if (pickedFile != null) {
+      image.value = File(pickedFile.path);
     }
   }
 
-  //Place Order
+  Future<void> placeOrder(File file) async {
+    try {
+      isLoading.value = true;
 
-  
+      final response = await OrderService.placeOrder(file);
+
+      Get.snackbar(
+        "Success",
+        response.data["message"] ?? "Order placed successfully",
+      );
+      Get.snackbar(
+        "Error",
+        "something went wrong"
+      );
+    } catch (e) {
+
+      Get.snackbar(
+        "Error",
+        e.toString(),
+      );
+    } finally {
+      isLoading.value = false;
+    }
+  }
 }
