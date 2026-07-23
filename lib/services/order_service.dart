@@ -29,10 +29,5 @@ class OrderService {
     });
 
     var response = Apiutil.dio.post('/orders', data: formData);
-
-
-
-
-
   }
 }
