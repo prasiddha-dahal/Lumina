@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:flutterecommerce/controllers/cart_controller.dart';
+import 'package:flutterecommerce/routes/app_routes.dart';
 import 'package:get/get.dart';
 
 class CartView extends GetView<CartController> {
@@ -11,11 +12,13 @@ class CartView extends GetView<CartController> {
       child: Scaffold(
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
+          child: SizedBox(
             height: 60,
             width: double.infinity,
             child: FilledButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(AppRoutes.order);
+              },
               style: FilledButton.styleFrom(
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.zero,

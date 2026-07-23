@@ -6,4 +6,5 @@ class AppRoutes {
    static String productDetail = '/productDetail';
    static String productByCategries = '/productByCategries';
    static String carts = '/carts';
+   static String order = '/order';
 }
