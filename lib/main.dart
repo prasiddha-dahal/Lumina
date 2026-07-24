@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.orange)),
-      home: SplashView(),
       initialBinding: ControllersBinding(),
       initialRoute: AppRoutes.splash,
       getPages: AppPages.routes,

@@ -102,9 +102,5 @@ Future<void> authCheck() async {
     isVisible.value = !isVisible.value;
   }
 
-  @override
-  void onInit() {
-    super.onInit();
-    authCheck();
-  }
+  
 }
